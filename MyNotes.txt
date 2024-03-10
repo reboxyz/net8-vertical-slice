@@ -1,0 +1,12 @@
+
+mkdir VerticalSlice      
+dotnet new sln             
+dotnet new webapi -n NewsLetter.API
+dotnet sln add NewsLetter.API    
+
+cd NewsLetter.API
+
+dotnet tool update --global dotnet-ef
+dotnet ef migrations add "CreateArticle"
+
+dotnet new  gitignore
