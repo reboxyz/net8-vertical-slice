@@ -1,5 +1,6 @@
 using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using NewsLetter.API.Contracts.Articles;
 using NewsLetter.API.Database;
@@ -52,7 +53,7 @@ public class GetArticleEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/articles/{id}", async (Guid id, ISender sender) =>
+        app.MapGet("api/articles/{id}", [AllowAnonymous] async (Guid id, ISender sender) =>
         {
             var query = new GetArticle.Query { Id = id};
             var result = await sender.Send(query);

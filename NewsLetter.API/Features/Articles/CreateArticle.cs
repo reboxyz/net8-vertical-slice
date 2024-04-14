@@ -2,6 +2,7 @@ using Carter;
 using FluentValidation;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using NewsLetter.API.Contracts.Articles;
 using NewsLetter.API.Database;
 using NewsLetter.API.Entities;
@@ -69,7 +70,7 @@ public class CreateArticleEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/articles", async (CreateArticleRequest request, ISender sender) => 
+        app.MapPost("api/articles", [AllowAnonymous] async (CreateArticleRequest request, ISender sender) => 
         {
             var comand = request.Adapt<CreateArticle.Command>(); // field mapper
             var result = await sender.Send(comand);

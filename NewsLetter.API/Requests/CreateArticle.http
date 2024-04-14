@@ -1,0 +1,13 @@
+@host=http://localhost:5000
+
+POST {{host}}/api/articles
+Content-Type: application/json
+
+{
+    "title": "This is a sample Article for Testing",
+    "content": "Hello, there! How are you?",
+    "tags": [
+        "comedy", "youth", "romance"
+    ]
+}
+
